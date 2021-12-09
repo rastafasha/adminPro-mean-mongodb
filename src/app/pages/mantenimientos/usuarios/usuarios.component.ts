@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { Usuario } from 'src/app/models/usuario.model';
-
-import { BusquedasService } from 'src/app/services/busquedas.service';
-import { ModalImagenService } from 'src/app/services/modal-imagen.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
 import { delay } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+
+import { Usuario } from '../../../models/usuario.model';
+import { BusquedasService } from '../../../services/busquedas.service';
+import { ModalImagenService } from '../../../services/modal-imagen.service';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -79,7 +79,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     }
 
     this.busquedaService.buscar('usuarios', termino)
-    .subscribe( resultados => {
+    .subscribe( (resultados: Usuario[]) => {
       this.usuarios = resultados;
     })
   }

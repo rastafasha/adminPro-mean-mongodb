@@ -10,7 +10,10 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
-import { UsuariosComponent } from './mantenimientos/usuarios/usuarios/usuarios.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 
 const routes: Routes = [
     {
@@ -27,7 +30,10 @@ const routes: Routes = [
             { path: 'perfil', component: PerfilComponent, data:{tituloPage:'Perfil'} },
 
             //mantenimientos
-            { path: 'usuarios', component: UsuariosComponent, data:{tituloPage:'Usuarios de App'} },
+            { path: 'usuarios', component: UsuariosComponent, data:{tituloPage:'Mantenimiento de Usuarios '} },
+            { path: 'hospitales', component: HospitalesComponent, data:{tituloPage:'Mantenimiento de Hospitales '} },
+            { path: 'medicos', component: MedicosComponent, data:{tituloPage:'Mantenimiento de Medicos '} },
+            { path: 'medico/:id', component: MedicoComponent, data:{tituloPage:'Mantenimiento de Medico '} },
         ]
     },
 ];

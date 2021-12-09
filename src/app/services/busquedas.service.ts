@@ -4,6 +4,8 @@ import {environment} from '../../environments/environment';
 
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario.model';
+import { Hospital } from '../models/hospital.model';
+import { Medico } from '../models/medico.model';
 
 const base_url = environment.baseUrl;
 
@@ -34,6 +36,13 @@ export class BusquedasService {
     )
   }
 
+  private trasnformarHospitales(resultados: any[]): Hospital[]{
+    return resultados;
+  }
+  private trasnformarMedicos(resultados: any[]): Medico[]{
+    return resultados;
+  }
+
   buscar(tipo: 'usuarios'|'medicos'|'hospitales',
         termino: string
         ){
@@ -44,8 +53,14 @@ export class BusquedasService {
           switch(tipo) {
             case 'usuarios':
               return this.trasnformarUsuarios(resp.resultados)
-            default:
-              return[];
+
+              case 'hospitales':
+                return this.trasnformarHospitales(resp.resultados)
+
+                case 'medicos':
+                return this.trasnformarMedicos(resp.resultados)
+              default:
+                return[];
           }
         })
       )

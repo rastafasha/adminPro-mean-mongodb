@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { PagesModule } from './pages/pages.module';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { ComponentsModule } from './components/components.module';
+import { PipesModule } from './pipes/pipes.module';
+
 
 
 
@@ -22,6 +24,7 @@ import { ComponentsModule } from './components/components.module';
     PagesModule,
     AuthModule,
     ComponentsModule,
+    PipesModule
 
   ],
   bootstrap: [AppComponent]
