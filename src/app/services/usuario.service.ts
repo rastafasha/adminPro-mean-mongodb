@@ -34,6 +34,10 @@ export class UsuarioService {
     return localStorage.getItem('token') || '';
   }
 
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.role;
+  }
+
   get uid():string{
     return this.usuario.uid || '';
   }
@@ -44,6 +48,11 @@ export class UsuarioService {
         'x-token': this.token
       }
     }
+  }
+
+  guardarLocalStorage(token: string, menu: any){
+    localStorage.setItem('token', token);
+        localStorage.setItem('menu', JSON.stringify(menu));
   }
 
 
@@ -66,6 +75,8 @@ export class UsuarioService {
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
+
 
     this.auth2.signOut().then(()=>{
       this.ngZone.run(()=>{
@@ -86,7 +97,7 @@ export class UsuarioService {
 
         this.usuario = new Usuario(nombre, email, '', img, google, role, uid);
 
-        localStorage.setItem('token', resp.token);
+        this.guardarLocalStorage(resp.token, resp.menu);
         return true;
       }),
       catchError(error => of(false))
@@ -97,7 +108,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/usuarios`, formData)
     .pipe(
       tap((resp: any) => {
-        localStorage.setItem('token', resp.token)
+        this.guardarLocalStorage(resp.token, resp.menu);
       })
     )
   }
@@ -116,7 +127,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login`, formData)
     .pipe(
       tap((resp: any) => {
-        localStorage.setItem('token', resp.token)
+        this.guardarLocalStorage(resp.token, resp.menu);
       })
     )
   }
@@ -125,7 +136,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login/google`, {token})
     .pipe(
       tap((resp: any) => {
-        localStorage.setItem('token', resp.token)
+        this.guardarLocalStorage(resp.token, resp.menu);
       })
     )
   }
@@ -157,7 +168,6 @@ export class UsuarioService {
 
 
   guardarUsuario(usuario: Usuario){
-
     return this.http.put(`${base_url}/usuarios/${usuario.uid}`, usuario, this.headers);
   }
 

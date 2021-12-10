@@ -11,14 +11,13 @@ import { SidebarService } from '../../services/sidebar.service';
 })
 export class SidebarComponent implements OnInit {
 
-  public menuItems: any[];
+
   public usuario: Usuario;
 
   constructor(
-    private sidebarService: SidebarService,
+    public sidebarService: SidebarService,
     private usuarioService: UsuarioService
   ) {
-    this.menuItems = sidebarService.menu;//llamamos la date en duro desde un servicio
 
     this.usuario = usuarioService.usuario;
 
